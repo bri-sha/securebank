@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/auth")
 public class UserController {
 
     @Autowired
@@ -36,16 +36,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
-        Optional<User> userOpt = userService.findByEmail(email);
-        if (userOpt.isPresent()) {
-            return ResponseEntity.ok(userOpt.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-        }
-    }
-
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody AuthRequest loginRequest) {
         Optional<User> userOpt = userService.findByEmail(loginRequest.getEmail());
@@ -63,6 +53,7 @@ public class UserController {
         String token = jwtUtil.generateToken(user.getEmail());
         return ResponseEntity.ok(new AuthResponse("Login successful", token));
     }
+
     @GetMapping("/profile")
     public ResponseEntity<?> getUserProfile(@RequestHeader("Authorization") String authHeader) {
         String token = authHeader.replace("Bearer ", "");
@@ -73,6 +64,16 @@ public class UserController {
         Optional<User> user = userService.findByEmail(email);
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        Optional<User> userOpt = userService.findByEmail(email);
+        if (userOpt.isPresent()) {
+            return ResponseEntity.ok(userOpt.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
