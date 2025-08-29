@@ -46,19 +46,25 @@ SecureBank is a Java + Spring Boot based backend system designed to process digi
 Create a MySQL database:
 ```sql
 CREATE DATABASE securebank_db;
-CREATE USER 'root'@'localhost' IDENTIFIED BY '112131';
+CREATE USER 'root'@'localhost' IDENTIFIED BY '<your password>';
 GRANT ALL PRIVILEGES ON securebank_db.* TO 'root'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
 ### 2. Configuration
+Set the following environment variables before running the project:
+    $env:DB_NAME="securebank_db"
+    $env:DB_USER="root"
+    $env:DB_PASSWORD="yourStrongPassword"
+    $env:SERVER_PORT="8080"
+
 Update `src/main/resources/application.properties` if needed:
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/securebank_db
-spring.datasource.username=root
-spring.datasource.password=112131
+spring.datasource.username=${DB_USER:root}
+spring.datasource.password=${DB_PASSWORD:}
 spring.jpa.hibernate.ddl-auto=update
-server.port=8080
+server.port=${SERVER_PORT:8080}
 ```
 
 ### 3. Build and Run
