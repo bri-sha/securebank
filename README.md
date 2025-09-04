@@ -47,14 +47,14 @@ Create a MySQL database:
 ```sql
 CREATE DATABASE securebank_db;
 CREATE USER 'root'@'localhost' IDENTIFIED BY '<your password>';
-GRANT ALL PRIVILEGES ON securebank_db.* TO 'root'@'localhost';
+GRANT ALL PRIVILEGES ON securebank_db.* TO 'username'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
 ### 2. Configuration
 Set the following environment variables before running the project:
     $env:DB_NAME="securebank_db"
-    $env:DB_USER="root"
+    $env:DB_USER="username"
     $env:DB_PASSWORD="yourStrongPassword"
     $env:SERVER_PORT="8080"
 
