@@ -231,20 +231,6 @@ The fraud scoring system analyzes multiple factors:
 - Input validation and sanitization
 - SQL injection prevention with JPA
 
-## 🧪 Testing
-
-Run tests with:
-```bash
-mvn test
-```
-
-## 📞 API Testing with Postman
-
-1. Import the provided Postman collection
-2. Set up environment variables:
-   - `base_url`: `http://localhost:8080`
-   - `jwt_token`: (obtained from login response)
-
 ## 🐛 Troubleshooting
 
 ### Common Issues
@@ -259,10 +245,6 @@ mvn test
 
 3. **Port Already in Use**
    - Change the port in `application.properties`: `server.port=8081`
-
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ## 🤝 Contributing
 
